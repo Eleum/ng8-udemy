@@ -1,10 +1,18 @@
 <div class="container">
-    <label>Server Name</label>
-    <!-- <input type="text" class="form-control" (input)="onServerNameUpdate($event)"> -->
-    <input type="text" class="form-control" [(ngModel)]="userName">
-    <p>{{ userName }}</p>
-    <button class="btn btn-primary" [disabled]="!userName" (click)="clearUserName()">Clear user name</button>
-    <p>{{ alertCreationStatus }}</p>
+    <h1>Some name</h1>
+    <input type="text" class="form-control" [(ngModel)]="alertName">
+    <button class="btn btn-primary" [disabled]="!alertName" (click)="createAlert()">Create success alert</button>
+    <p *ngIf="isAlertCreated; else noAlert">Alert was created, alert name is {{ alertName }}</p>
+    <!-- <ng-template #noAlert>
+        <p>No server was created</p>
+    </ng-template> -->
     <app-warning-alert></app-warning-alert>
-    <app-success-alert></app-success-alert>
+    <app-success-alert *ngFor="let alert of alerts"></app-success-alert>
+    <app-server></app-server>
+    <app-server></app-server>
+    <button class="btn btn-secondary" (click)="displayDetails()">Display details</button>
+    <p *ngIf="displayStatus">I don't like my life</p>
+    <p *ngFor="let log of displayStatusLogs; let i = index" 
+        [ngStyle]="i >= 4 && {'background-color': 'blue'}" 
+        [ngClass]="{'white': i >= 4}">{{ i+1 }}. {{ log }}</p>
 </div>
