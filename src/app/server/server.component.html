@@ -1,3 +1,8 @@
 <p [ngStyle]="{backgroundColor: getColor()}" [ngClass]="{'online': serverStatus === 'online'}">
     {{ 'Server' }} with ID {{ serverId }} is {{ getServerStatus() }}
 </p>
+<button class="btn btn-primary" (click)="showSecret();">Display details</button>
+<p hidden [ngClass]="{'shown': isSecretShown === true}">Secret password - {{ secret }}</p>
+<div *ngFor="let log of logs; let i = index">
+    <p [ngStyle]="{backgroundColor: getLogStyle(i)}">time: {{log.date}} | status: {{log.status}}</p>
+</div>

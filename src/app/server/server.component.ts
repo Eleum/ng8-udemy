@@ -10,6 +10,11 @@ export class ServerComponent implements OnInit {
   serverStatus = "offline";
   servers = ["Test server", "Test server 2"];
 
+  // task
+  secret = "password: fuck off";
+  isSecretShown = false;
+  logs = [];
+
   constructor() {
     this.serverStatus = Math.random() >= 0.5 ? "online" : "offline";
   }
@@ -27,5 +32,14 @@ export class ServerComponent implements OnInit {
 
   getColor() {
     return this.serverStatus === "online" ? "green" : "red";
+  }
+
+  showSecret() {
+    this.isSecretShown = !this.isSecretShown;
+    this.logs.push({ date: Date.now(), status: this.isSecretShown });
+  }
+
+  getLogStyle(index: number) {
+    return index > 4 ? "blue" : "white";
   }
 }
